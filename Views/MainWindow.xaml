@@ -1,0 +1,18 @@
+<Window x:Class="PizzariaApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pizzaria - Sistema de Pedidos" Height="300" Width="420"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource CorFundo}">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="280">
+        <TextBlock Text="🍕 Sistema Pizzaria" FontSize="24" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+        <Button Content="Novo Pedido (Atendimento)" Style="{StaticResource BotaoPadrao}"
+                Height="45" Margin="0,0,0,15" Click="AbrirNovoPedido_Click"/>
+
+        <Button Content="Painel da Cozinha" Style="{StaticResource BotaoPadrao}"
+                Height="45" Background="{StaticResource CorSecundaria}"
+                Click="AbrirPainelCozinha_Click"/>
+    </StackPanel>
+</Window>

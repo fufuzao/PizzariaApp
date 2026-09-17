@@ -1,0 +1,84 @@
+<Window x:Class="PizzariaApp.Views.NovoPedidoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Novo Pedido - Atendimento" Height="640" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource CorFundo}">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- COLUNA ESQUERDA: Cliente + Seleção de pizza -->
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Dados do Cliente" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Nome"/>
+            <TextBox x:Name="TxtNomeCliente"/>
+
+            <TextBlock Text="Telefone"/>
+            <TextBox x:Name="TxtTelefoneCliente"/>
+
+            <TextBlock Text="Endereço"/>
+            <TextBox x:Name="TxtEnderecoCliente" Height="50" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+            <Separator Margin="0,10,0,15"/>
+
+            <TextBlock Text="Adicionar Pizza" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Sabor"/>
+            <ComboBox x:Name="CmbSabor" DisplayMemberPath="Nome"/>
+
+            <TextBlock Text="Tamanho"/>
+            <ComboBox x:Name="CmbTamanho" SelectionChanged="CmbTamanho_SelectionChanged">
+                <ComboBoxItem Content="Pequena" Tag="Pequena"/>
+                <ComboBoxItem Content="Média" Tag="Media" IsSelected="True"/>
+                <ComboBoxItem Content="Grande" Tag="Grande"/>
+            </ComboBox>
+
+            <TextBlock Text="Quantidade"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                <TextBox x:Name="TxtQuantidade" Width="60" Text="1"/>
+                <TextBlock x:Name="TxtPrecoUnitario" VerticalAlignment="Center" Margin="15,0,0,0"
+                           Foreground="Gray"/>
+            </StackPanel>
+
+            <Button Content="Adicionar ao Carrinho" Style="{StaticResource BotaoPadrao}"
+                    Background="{StaticResource CorSecundaria}"
+                    Click="AdicionarAoCarrinho_Click"/>
+        </StackPanel>
+
+        <!-- COLUNA DIREITA: Carrinho / Resumo -->
+        <StackPanel Grid.Column="2">
+            <TextBlock Text="Resumo do Pedido" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <DataGrid x:Name="GridCarrinho" AutoGenerateColumns="False" Height="380"
+                      IsReadOnly="True" CanUserAddRows="False" GridLinesVisibility="Horizontal"
+                      Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item" Binding="{Binding DescricaoLinha}" Width="*"/>
+                    <DataGridTextColumn Header="Preço Unit." Binding="{Binding PrecoUnitario, StringFormat={}{0:C}}" Width="90"/>
+                    <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal, StringFormat={}{0:C}}" Width="90"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Content="Remover Item Selecionado" Margin="0,10,0,0"
+                    Style="{StaticResource BotaoPadrao}" Background="#999999"
+                    Click="RemoverItem_Click"/>
+
+            <Border Background="White" CornerRadius="6" Padding="15" Margin="0,20,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="TxtValorTotal" Text="Total: R$ 0,00"
+                               FontSize="22" FontWeight="Bold" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Border>
+
+            <Button x:Name="BtnEnviarPedido" Content="Enviar Pedido" Height="50" Margin="0,20,0,0"
+                    FontSize="16" Style="{StaticResource BotaoPadrao}"
+                    Click="EnviarPedido_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
